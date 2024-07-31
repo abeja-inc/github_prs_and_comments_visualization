@@ -1,0 +1,46 @@
+{{
+  organization(login: "{organization}") {{
+    repositories(first: 100, after: {cursor_part}) {{
+      pageInfo {{
+        endCursor
+        hasNextPage
+      }}
+      edges {{
+        node {{
+          name
+          pullRequests(first: 10, after: null, orderBy: {{field: CREATED_AT, direction: DESC}}) {{
+            pageInfo {{
+              endCursor
+              hasNextPage
+            }}
+            edges {{
+              node {{
+                createdAt
+                author {{
+                  login
+                }}
+                assignees(first: 10) {{
+                  edges {{
+                    node {{
+                      login
+                    }}
+                  }}
+                }}
+                comments(first: 100) {{
+                  edges {{
+                    node {{
+                      author {{
+                        login
+                      }}
+                      body
+                    }}
+                  }}
+                }}
+              }}
+            }}
+          }}
+        }}
+      }}
+    }}
+  }}
+}}
